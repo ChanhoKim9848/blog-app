@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
     <footer>
@@ -15,7 +15,7 @@ const Footer = () => {
         <li><Link to="/posts/categories/Weather">Weather</Link></li>
       </ul>
       <div className="footer__copyright">
-        <small>2026 &copy; BlogSite. All Rights Reserved.</small>
+        <small>{currentYear} &copy; BlogSite. All Rights Reserved.</small>
       </div>
     </footer>
   )
