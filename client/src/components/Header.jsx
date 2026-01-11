@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "../images/logo.png";
-import {Fabars} from 'react-icons/fa';
+// import {Fabars} from 'react-icons/fa';
 import {AiOutlineClose} from 'react-icons/ai';
 
 const Header = () => {
@@ -11,9 +11,9 @@ const Header = () => {
         <Link to="/" className="nav__logo">
           <img src={Logo} alt="Navbar Logo" />
         </Link>
-      <ul>
+      <ul className="nav__menu">
         <li>
-          <Link to="/profile">AXS</Link>
+          <Link to="/profile">profile</Link>
         </li>
         <li>
           <Link to="/create">Create Post</Link>
