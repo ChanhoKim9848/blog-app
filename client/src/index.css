@@ -225,7 +225,7 @@ footer {
 }
 
 /* =========== POSTS ============*/
-.posts__container, .author-posts__container .category-posts__container {
+.posts__container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 4rem;
@@ -307,5 +307,4 @@ footer {
 
 .post-detail p {
   margin-bottom: 0.7rem;
-  
 }
