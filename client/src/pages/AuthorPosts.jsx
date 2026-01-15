@@ -3,7 +3,7 @@ import PostItem from '../components/PostItem'
 import { DUMMY_POSTS } from '../data'
 
 const AuthorPosts = () => {
-  const [posts, setPosts] = React.useState([DUMMY_POSTS])
+  const [posts, setPosts] = React.useState(DUMMY_POSTS)
   return (
     <section className="author-posts">
       {posts.length > 0 ? (
