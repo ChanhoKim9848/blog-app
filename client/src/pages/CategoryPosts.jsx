@@ -5,7 +5,7 @@ import { DUMMY_POSTS } from '../data'
 const CategoryPosts = () => {
   const [posts, setPosts] = React.useState(DUMMY_POSTS)
   return (
-    <section className="posts__container">
+    <section>
       {posts.length > 0 ? (
         <div className="container posts__container">
           {posts.map(({ id, thumbnail, category, title, desc, authorID }) => (
