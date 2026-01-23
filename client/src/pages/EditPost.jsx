@@ -81,7 +81,7 @@ const EditPost = () => {
           <input
             type="file"
             onChange={(e) => setThumbnail(e.target.files[0])}
-            accept="png,jpg,jpeg"
+            accept=".png,.jpg,.jpeg"
           />
           <button type="submit" className="btn primary">
             Create
