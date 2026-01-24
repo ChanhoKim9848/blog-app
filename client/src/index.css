@@ -479,20 +479,20 @@ textarea {
   border-radius: var(--radius-3);
 }
 
-.dashboard__post-info{
+.dashboard__post-info {
   display: flex;
   gap: 2rem;
   width: 100%;
   align-items: center;
 }
 
-.dashboard__post-thumbnail{
-  width:4rem;
+.dashboard__post-thumbnail {
+  width: 4rem;
   border-radius: var(--radius-1);
   overflow: hidden;
 }
 
-.dashboard__post-actions{
+.dashboard__post-actions {
   display: flex;
   gap: 1rem;
 }
@@ -500,7 +500,128 @@ textarea {
 /* ============================== TIPTAP Editor =============================*/
 
 .ql-editor {
-  overflow:scroll;
-  background : var(--color-white);
-  height:10rem !important;
+  overflow: scroll;
+  background: var(--color-white);
+  height: 10rem !important;
+}
+
+/* ============================== Media Queries =============================*/
+
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  .container {
+    width: var(--container-width-md);
+  }
+
+  /* NAVBAR */
+
+  .nav__container {
+    position: relative;
+  }
+
+  .nav__menu {
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .nav__menu li {
+    width: 100%;
+    box-shadow: -2rem 4rem 4rem rgba(0, 0, 0, 0.26);
+    animation: dropDown 500ms ease forwards;
+    opacity: 0;
+    transform: rotateX(90deg);
+    transform-origin: top;
+  }
+
+  @keyframes dropDown {
+    to {
+      opacity: 1;
+      transform: rotateX(0);
+    }
+  }
+
+  .nav__menu li:nth-child(2) {
+    animation-delay: 300ms;
+  }
+  .nav__menu li:nth-child(3) {
+    animation-delay: 600ms;
+  }
+  .nav__menu li:nth-child(4) {
+    animation-delay: 900ms;
+  }
+
+  .nav__menu li a {
+    display: block;
+    background-color: var(--color-white);
+    padding: 0.85rem 2.5rem;
+  }
+
+  .nav__toggle-btn {
+    display: inline-block;
+    background: transparent;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+
+/* posts */
+
+  .posts__container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .footer__categories {
+    flex-direction: column;
+  }
+
+  .post-detail {
+    width: 100%;
+    background: transparent;
+    padding: 0;
+  }
+
+
+  /* form */
+  
+  .register,
+  .login,
+  .create-post {
+    width: 100%;
+  }
+
+  .form.profile__form {
+    margin-top: 2.5rem;
+    width: 100%;
+  }
+
+  .authors__container {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .dashboard__post{
+    flex-direction: column;
+  }
+
+  .dashboard__post-info{
+    gap:1.5rem;
+  }
+
+  .dashboard__post-thumbnail{
+    width: 5rem;
+  }
 }
