@@ -1,0 +1,29 @@
+# Dependencies
+/node_modules
+/bower_components
+
+# Build artifacts and temporary files
+/dist
+/build
+/temp
+/tmp
+*.log
+*.tmp
+*.swp
+*.swo
+
+# IDE and OS specific files
+.idea/         # IntelliJ IDEA
+.vscode/       # VS Code (optional, if local settings shouldn't be shared)
+.sass-cache/
+.DS_Store      # macOS
+Thumbs.db      # Windows
+
+# Environment variables
+.env
+.env.local
+
+# Web-specific outputs (e.g., Visual Studio publish files)
+*.[Pp]ublish.xml
+*.pubxml
+*.publishproj
