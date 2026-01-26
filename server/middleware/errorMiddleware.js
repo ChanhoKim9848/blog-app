@@ -7,13 +7,13 @@ const notFound = (req, res, next) => {
 
 // Middleware to handle errors
 const errorHandler = (error, req, res, next) => {
-  if (res.headerSent) {
+  if (res.headersSent) {
     return next(error);
   }
 
   res
     .status(error.code || 500)
-    .json({ message: error.message || "An Unknown Error Occured" });
+    .json({ message: error.message || "An Unknown Error Occurred" });
 };
 
 module.exports = { notFound, errorHandler };

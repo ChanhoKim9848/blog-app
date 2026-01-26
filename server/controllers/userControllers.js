@@ -13,7 +13,7 @@ const loginUser = async (req, res, next) => {
 };
 
 // =========== User Profile ============
-// POST: api/users/:id
+// GET: api/users/:id
 // PROTECTED
 const getUser = async (req, res, next) => {
   res.json("get user");
@@ -26,15 +26,15 @@ const changeAvatar = async (req, res, next) => {
   res.json("change user avatar");
 };
 
-// =========== Edit user detail (from profile) ============
-// POST: api/users/edit-user
+// =========== Get all authors ============
+// GET: api/users/
 // PROTECTED
 const editUser = async (req, res, next) => {
-  res.json("edit user detail");
+  res.json("get authors");
 };
 
 // =========== Edit authors detail (from profile) ============
-// POST: api/users/edit-user
+// GET: api/users/:id
 // UNPROTECTED
 const getAuthors = async (req, res, next) => {
   res.json("edit user detail");
