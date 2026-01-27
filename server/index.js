@@ -19,12 +19,14 @@ app.use("/api/posts", postRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
+const PORT = process.env.PORT || 5000;
+
 connect(process.env.MONGO_URI)
-  .then(
-    app.listen(() =>
-      console.log(`Server running on port: ${process.env.PORT || 5000}`),
-    ),
-  )
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port: ${PORT}`);
+    });
+  })
   .catch((error) => {
-    console.log(error);
+    console.error("MongoDB connection failed:", error);
   });
