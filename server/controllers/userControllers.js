@@ -1,8 +1,47 @@
+const bcrypt = require("bcryptjs");
+
+const User = require("../models/userModel");
+
+const HttpError = require("../models/errorModel");
+
 // =========== Register a user ============
 // POST: api/users/register
 // UNPROTECTED
 const registerUser = async (req, res, next) => {
-  res.json("register user");
+  try {
+    const { name, email, password, confirmPassword } = req.body;
+    if (!name || !email || !password) {
+      return next(new HttpError("Fill in all fields", 422));
+    }
+
+    // change email to lowercase characters
+    const newEmail = email.trim().toLowerCase();
+
+    const emailExists = await User.findOne({ email: newEmail });
+    if (emailExists) {
+      return next(new HttpError("Email already exists", 422));
+    }
+    if (password.trim().length < 6) {
+      return next(
+        new HttpError("Password should be at least 6 characters", 422),
+      );
+    }
+
+    if (password != confirmPassword) {
+      return next(new HttpError("Passwords do not match", 422));
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+    const newUser = await User.create({
+      name,
+      email: newEmail,
+      password: hashedPassword,
+    });
+    res.status(201).json(`New user ${newUser.email} registered`);
+  } catch (error) {
+    return next(new HttpError("User registration failed", 422));
+  }
 };
 
 // =========== Login a registered user ============
