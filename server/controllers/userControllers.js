@@ -79,7 +79,28 @@ const loginUser = async (req, res, next) => {
 // GET: api/users/:id
 // PROTECTED
 const getUser = async (req, res, next) => {
-  res.json("get user");
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id).select("-password");
+    if (!user) {
+      return next(new HttpError("User not found", 404));
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    return next(new HttpError(error));
+  }
+};
+
+// =========== Edit authors detail (from profile) ============
+// GET: api/users/:id
+// UNPROTECTED
+const getAuthors = async (req, res, next) => {
+  try {
+    const authors = await User.find().select("-password");
+    res.status(200).json(authors);
+  } catch (error) {
+    return next(new HttpError(error));
+  }
 };
 
 // =========== Change user avatar (profile picture) ============
@@ -94,13 +115,6 @@ const changeAvatar = async (req, res, next) => {
 // PROTECTED
 const editUser = async (req, res, next) => {
   res.json("get authors");
-};
-
-// =========== Edit authors detail (from profile) ============
-// GET: api/users/:id
-// UNPROTECTED
-const getAuthors = async (req, res, next) => {
-  res.json("edit user detail");
 };
 
 module.exports = {
