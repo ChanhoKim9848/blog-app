@@ -112,7 +112,7 @@ const getAuthors = async (req, res, next) => {
 const changeAvatar = async (req, res, next) => {
   try {
     if (!req.files.avatar) {
-      return next(new HttpError("Please check "));
+      return next(new HttpError("Please choose an image"), 422);
     }
 
     //find user from db
@@ -154,7 +154,7 @@ const changeAvatar = async (req, res, next) => {
           { avatar: newFilename },
           { new: true },
         );
-        if (!updateAvatar) {
+        if (!updatedAvatar) {
           return next(new HttpError("Avatar could not be changed"), 422);
         }
         res.status(200).json(updatedAvatar);
@@ -169,7 +169,57 @@ const changeAvatar = async (req, res, next) => {
 // GET: api/users/
 // PROTECTED
 const editUser = async (req, res, next) => {
-  res.json("get authors");
+  try {
+    const { name, email, currentPassword, newPassword, confirmNewPassword } =
+      req.body;
+    if (
+      !name ||
+      !email ||
+      !currentPassword ||
+      !newPassword ||
+      !confirmNewPassword
+    ) {
+      return next(new HttpError("Fill in all fields", 422));
+    }
+    // get user from database
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return next(new HttpError("User not found", 403));
+    }
+
+    // make sure new email does not exist already
+    const emailExist = await User.findOne({ email });
+    // we want to update other details with/without changing the email
+    // (which is a unique id because we use it to login)
+    if (emailExist && emailExist._id != req.user.id) {
+      return next(new HttpError("Email already exists", 422));
+    }
+    // compare current password to db password
+    const validateUserPassword = await bcrypt.compare(
+      currentPassword,
+      user.password,
+    );
+    if (!validateUserPassword) {
+      return next(new HttpError("Invalid current password", 422));
+    }
+    // compare new passwords
+    if (newPassword !== confirmNewPassword) {
+      return next(new HttpError("New passwords do not match", 422));
+    }
+    // hash new password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    // update user info in db
+    const newInfo = await User.findByIdAndUpdate(
+      req.user.id,
+      { name, email, password: hash },
+      { new: true },
+    );
+    res.status(200).json(newInfo);
+  } catch (error) {
+    return next(new HttpError("User not found", 403));
+  }
 };
 
 module.exports = {
