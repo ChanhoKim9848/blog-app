@@ -27,7 +27,7 @@ const getCatPosts = async (req, res, next) => {
 };
 
 // ============ GET AUTHOR POST ==============
-// POST: api/posts/users/:id
+// GET: api/posts/users/:id
 // UNPROTECTED
 const getUserPosts = async (req, res, next) => {
   res.json("get user post");
