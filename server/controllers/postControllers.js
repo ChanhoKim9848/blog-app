@@ -1,3 +1,10 @@
+const Post = require("../models/postModel");
+const User = require("../models/userModel");
+const path = require("path");
+const fs = require("fs");
+const { v4: uuid } = require("uuid");
+const HttpError = require("../models/errorModel");
+
 // ============ CREATE POST ==============
 // POST: api/posts
 // PROTECTED
