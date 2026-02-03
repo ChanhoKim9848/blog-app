@@ -11,8 +11,6 @@
 *.tmp
 *.swp
 *.swo
-uploads/
-/uploads
 uploads
 
 # IDE and OS specific files
